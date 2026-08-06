@@ -212,6 +212,12 @@ needs an OXT pass" and let a human run `tests/datachannel-selftest.livecodescrip
    binary with `numToByte`); and `is` is case-INsensitive, so byte-exact Data
    comparison needs `set the caseSensitive to true` first. The checker now
    flags the first two statically (`LCS_ANTIPATTERNS`).
+10. **A zero-argument call is written BARE in statement position** - OXT cannot
+   compile a `dcCleanup()` STATEMENT (cost the selftest's closeStack). With
+   arguments the parenthesized statement form is fine (`dcFreePeer(sPeer)`),
+   and expression position always keeps its parens (`dcCleanup() is 0`). The
+   checker flags the empty-parens statement form (third `LCS_ANTIPATTERNS`
+   rule); the proven family idiom is `btStartSession` + `the result`.
 
 ## The single-threaded performance playbook (carried)
 

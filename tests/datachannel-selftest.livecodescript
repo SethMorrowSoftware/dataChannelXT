@@ -327,5 +327,7 @@ command stCleanup
    end if
    put empty into sPeerA
    put empty into sPeerB
-   dcCleanup()
+   -- bare command form: OXT cannot compile a zero-argument `name()` STATEMENT
+   -- (the `dcCleanup() is 0` assertions in stFinish are expressions - fine)
+   dcCleanup
 end stCleanup

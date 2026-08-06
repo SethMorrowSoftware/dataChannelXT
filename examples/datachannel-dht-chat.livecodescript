@@ -305,8 +305,9 @@ command wxStart
       exit wxStart
    end if
    -- the DTLS certificate is generated lazily on first use; warming it now
-   -- shaves it off the first connect
-   dcInit()
+   -- shaves it off the first connect (bare form: a zero-argument `name()`
+   -- statement does not compile in OXT)
+   dcInit
    btStartSession
    put the result into sSession
    if sSession is 0 or sSession is empty then
@@ -361,7 +362,7 @@ command wxStop
    -- dcCleanup frees every peer/channel and joins the native threads - the one
    -- contract every DataChannelXT app must honour before quitting
    if sHaveDc is "true" then
-      dcCleanup()
+      dcCleanup
    end if
    if sSession is not empty and sSession is not 0 then
       btStopSession sSession
