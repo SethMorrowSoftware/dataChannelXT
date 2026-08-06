@@ -187,6 +187,12 @@ needs an OXT pass" and let a human run `tests/datachannel-selftest.livecodescrip
    source; re-verify on a version bump.
 6. **An IPv6-less container prints `juice: UDP socket creation failed, errno=97`**
    (EAFNOSUPPORT) and then works over IPv4 — harmless noise, not a failure.
+7. **No preprocessor directive inside a `DCX_GUARD_*` body** (the macro-comma
+   trap's sibling): a `#ifdef` inside a macro ARGUMENT is behaviour the
+   standard never defined — gcc tolerates it, MSVC rejects it (C2121 "'#':
+   invalid character"), which is exactly how the first-ever Windows build
+   failed (`dcx_library_version`). Hoist the conditional into a plain static
+   helper and call the helper from the guard body.
 
 ## LiveCodeScript / LCB / OXT gotchas (carried; OXT is stricter than LiveCode)
 
