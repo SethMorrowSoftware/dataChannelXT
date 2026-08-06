@@ -34,7 +34,9 @@ end openStack
 
 on closeStack
    dcStopPolling
-   dcCleanup()
+   -- bare command form: OXT cannot compile a zero-argument `name()` STATEMENT
+   -- (function position, e.g. `dcCleanup() is 0`, is fine)
+   dcCleanup
 end closeStack
 
 -- ---------------------------------------------------------------- the UI --
