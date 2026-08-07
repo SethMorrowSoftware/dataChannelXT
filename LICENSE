@@ -22,12 +22,14 @@ SOFTWARE.
 
 ---
 
-No Cloud Quick Share is built on the OpenXTalk extension family:
+DataChannelXT statically links the following third-party libraries into its
+committed per-platform binaries:
 
-  - TorrentXT   (org.openxtalk.library.torrent)  - MIT; wraps libtorrent-rasterbar
-                (BSD-3-Clause) and Boost (Boost Software License).
-  - cryptoXT    (org.openxtalk.library.sodium)   - MIT; wraps libsodium (ISC).  Optional.
-  - OnionXT                                       - MIT; Tor onion streams.      Optional.
+  - libdatachannel  (MPL-2.0)
+  - libjuice        (MPL-2.0)  - libdatachannel's vendored ICE agent
+  - usrsctp         (BSD-3-Clause) - its vendored SCTP stack
+  - plog            (MIT) - its vendored logging library
 
-Those extensions are separate projects under their own (permissive) licenses;
-see each project for details.
+DTLS comes from the system OpenSSL, which is not bundled. The full license
+texts are reproduced in THIRD-PARTY-LICENSES.md alongside this file, as those
+licenses require for binary distribution.
