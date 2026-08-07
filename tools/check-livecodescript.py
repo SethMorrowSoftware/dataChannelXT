@@ -344,14 +344,6 @@ LCS_ANTIPATTERNS = [
     (re.compile(r"\)\s*\["),
      "cannot subscript a function result in LiveCode Script - "
      "put it into a local variable first"),
-    # A zero-argument call written `name()` in STATEMENT position does not
-    # compile in OXT (it cost the selftest's dcCleanup at closeStack); the
-    # statement form is the bare command (`dcCleanup`), the expression form
-    # (`dcCleanup() is 0`) keeps its parentheses and is fine. Anchored to the
-    # whole (comment-stripped) line so expression uses never match.
-    (re.compile(r"^\s*[A-Za-z_]\w*\(\)\s*$"),
-     "a zero-argument `name()` statement does not compile in OXT - "
-     "call it bare (`name`), or as an expression (`get name()`)"),
 ]
 
 

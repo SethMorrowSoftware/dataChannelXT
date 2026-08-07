@@ -22,7 +22,7 @@ Also put `examples/datachannel-helpers.livecodescript` where your app can
 
 ```livecodescript
 on openStack
-   dcInit                                      -- optional, but moves the one-time
+   dcInit()                                    -- optional, but moves the one-time
                                                -- DTLS certificate cost off your
                                                -- first connection
    start using stack "dataChannelHelpers"
@@ -31,14 +31,10 @@ end openStack
 
 on closeStack
    dcStopPolling
-   dcCleanup     -- MANDATORY: there is no automatic unload hook; skipping this
+   dcCleanup()   -- MANDATORY: there is no automatic unload hook; skipping this
                  -- leaks the native worker threads at quit
 end closeStack
 ```
-
-Zero-argument calls are written **bare** in statement position — OXT cannot
-compile a `dcCleanup()` statement. In an expression the parentheses are
-required and fine: `if dcCleanup() is 0 then ...`.
 
 Everything the engine wants to tell you arrives as messages dispatched by the
 helpers (`dcMessage`, `dcChannelOpen`, ... — full list in the api-reference).

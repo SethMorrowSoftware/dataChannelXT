@@ -22,10 +22,7 @@
 #                     packages on Linux, Homebrew on macOS, vcpkg static on
 #                     Windows. fail-fast off so one platform never masks another.
 #
-#   commit-binaries : on push TO main - or a manual Run-workflow dispatch ON
-#                     main (the button must be a full substitute for a push:
-#                     GitHub dropped this repo's push events for hours on day
-#                     one) - gather the built libs and commit the
+#   commit-binaries : on push TO main, gather the built libs and commit the
 #                     SELF-CONTAINED ones into src/code/<arch-platform>/
 #                     ([skip ci], so no loop). Same two gates as the sibling
 #                     repos: main only (CI builds are not byte-reproducible, so
@@ -267,7 +264,7 @@ jobs:
     # "Workflow permissions" = "Read and write permissions".
     name: commit native libs to src/code
     needs: build-matrix
-    if: always() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     permissions:
       contents: write
